@@ -68,7 +68,7 @@ class ClientThread(threading.Thread):
 
 
 
-LOCALHOST = "192.168.0.8"
+LOCALHOST = "*.*.*.*"
 PORT = 8080
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
