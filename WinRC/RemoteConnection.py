@@ -5,17 +5,21 @@ dirname, filename = os.path.split(os.path.abspath(__file__))
 #print("file is", filename)
 
 Executer = "powershell.exe "
-InvokeCommandScript = dirname+"/InvokeCommand "
-CopyFileScript = dirname+"./CopyFile"
-GetFileScript = dirname+"./GetFile"
-RemoteSessionScript = dirname+"./RemoteSession"
-StartRemoteSessionScript = dirname+"/StartRemoteSession"
+InvokeCommandScript = dirname+"/PowershellScripts/InvokeCommand "
+CopyFileScript = dirname+"/PowershellScripts/CopyFile"
+GetFileScript = dirname+"/PowershellScripts/GetFile"
+RemoteSessionScript = dirname+"/PowershellScripts/RemoteSession"
+StartRemoteSessionScript = dirname+"/PowershellScripts/StartRemoteSession"
+RemoteDesktopScript = dirname+"/PowershellScripts/RemoteDesktop"
+TestConnectionScript = dirname+"/PowershellScripts/Testconnection"
 
 
 def InvokeCommand(server,*therest):
     command = ', '.join(therest)
     p = subprocess.Popen([Executer,InvokeCommandScript,server,"-command",command], stdout=sys.stdout)
     p.communicate()
+
+
 
 
 def ExecuteCommand(*therest):
@@ -34,14 +38,24 @@ def GetFile(server,frompath,topath):
     p.communicate()
 
 def RemoteSession(server):
-    p = subprocess.Popen("powershell "+RemoteSessionScript+" "+server)
-    p.wait()
-    #p = subprocess.Popen([Executer,RemoteSessionScript,server], stdout=sys.stdout)
-    #p.communicate()
+    #p = subprocess.Popen("start","powershell.exe "+RemoteSessionScript+" "+server)
+    #p.wait()
+    p = subprocess.Popen([Executer,RemoteSessionScript,server], stdout=sys.stdout)
+    #p.wait()
+    p.communicate()
 
 def StartRemoteSession(server):
     p = subprocess.Popen("powershell "+StartRemoteSessionScript+" "+server)
     p.wait()
+
+def RemoteDesktop(server):
+    p = subprocess.Popen("powershell " + RemoteDesktopScript + " " + server)
+    p.wait()
+
+def TestConnection(ip):
+    p = subprocess.Popen("powershell "+ TestConnectionScript +" "+ ip)
+    p.wait()
+
 
 
 
