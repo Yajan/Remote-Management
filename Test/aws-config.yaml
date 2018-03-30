@@ -1,0 +1,23 @@
+operatingsystem:
+  - windows
+
+region:
+  - name: us-east-2
+    instance : 2
+    keyname: TestKeyOne
+    image-id: ami-ed774688
+    security-group-id: sg-0c59ab67
+    subnet: subnet-bcfcabf1
+    instance-type: t2.micro
+
+  - name: us-west-2
+    instance : 1
+    keyname: TestKeyOne
+    image-id: ami-8b1886f3
+    security-group-id: sg-ed2a2991
+    subnet: subnet-294b7761
+    instance-type: t2.micro
+
+
+
+

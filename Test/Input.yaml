@@ -1,0 +1,42 @@
+scripts:
+    #Name of the JMX files which needs to be executed
+ # - SanityFileupload.jmx
+  - SanityLogin.jmx
+  #- ColumnSummaryTextNew.jmx
+  #- FileUploadPngTest.jmx
+  #- TopBottumRenameDelete.jmx
+  #- DSDeletionTest.jmx
+  #- NewViewTest.jmx
+  #- URLupload.jmx
+  #- XSSFuploadScript.jmx
+  #- AddCoumnBasisFunction.jmx
+
+url:
+    #URL of the Application under test
+  - https://app.mammoth.io/#/login
+
+browsers:
+    #Browser of execution
+  - chrome
+
+execution:
+    #Default value is 1 1 1 respectively
+  - concurrency: 2
+  - ramp-up: 3
+  - iteration: 2
+
+
+time-out:
+    #Maximum Duration of the test execution in minutes after which the execution terminates
+  - 40m
+
+cache:
+  - True
+
+instance:
+  - 10
+
+executionType:
+  distributed:
+    remote-systems:
+      - system1
