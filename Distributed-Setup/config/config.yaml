@@ -1,0 +1,14 @@
+jmeterPath:
+  - C:\Users\Yajana\apache-jmeter\apache-jmeter-3.3\bin
+
+gitPath:
+  - C:\Distributed-setup\scale_up_infra
+
+gitUrl:
+  - https://Deepak-merahkee:test123@github.com/EdgeMetric/scale_up_infra.git
+
+
+
+
+
+

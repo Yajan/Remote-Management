@@ -1,0 +1,11 @@
+Windows:
+  system1:
+    - 192.168.0.7, admin, sysadmin@999
+
+Linux:
+  system2:
+    - 10.0.0.1, admin, pass
+
+masterhubs:
+  - 192.168.0.7
+  - 192.168.0.8

@@ -1,0 +1,128 @@
+2018-03-28 18:21:37,916 INFO o.a.j.u.JMeterUtils: Setting Locale to en_IN
+2018-03-28 18:21:37,953 INFO o.a.j.JMeter: Loading user properties from: C:\Users\Yajana\apache-jmeter\apache-jmeter-3.3\bin\user.properties
+2018-03-28 18:21:37,968 INFO o.a.j.JMeter: Loading system properties from: C:\Users\Yajana\apache-jmeter\apache-jmeter-3.3\bin\system.properties
+2018-03-28 18:21:37,984 INFO o.a.j.JMeter: Setting Global property: users=2
+2018-03-28 18:21:37,984 INFO o.a.j.JMeter: Setting Global property: rampup=3
+2018-03-28 18:21:37,984 INFO o.a.j.JMeter: Setting Global property: count=2
+2018-03-28 18:21:37,984 INFO o.a.j.JMeter: Setting Global property: duration=2400
+2018-03-28 18:21:37,984 INFO o.a.j.JMeter: Setting Global property: Url=https://app.mammoth.io/#/login
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: Copyright (c) 1998-2017 The Apache Software Foundation
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: Version 3.3 r1808647
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: java.version=1.8.0_161
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: os.name=Windows 10
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: os.arch=amd64
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: os.version=10.0
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: file.encoding=Cp1252
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: Max memory     =536870912
+2018-03-28 18:21:38,015 INFO o.a.j.JMeter: Available Processors =4
+2018-03-28 18:21:38,031 INFO o.a.j.JMeter: Default Locale=English (India)
+2018-03-28 18:21:38,046 INFO o.a.j.JMeter: JMeter  Locale=English (India)
+2018-03-28 18:21:38,046 INFO o.a.j.JMeter: JMeterHome=C:\Users\Yajana\apache-jmeter\apache-jmeter-3.3
+2018-03-28 18:21:38,046 INFO o.a.j.JMeter: user.dir  =C:\Users\Yajana\PycharmProjects\Distributed-setup-4\Distributed-Setup\Client
+2018-03-28 18:21:38,046 INFO o.a.j.JMeter: PWD       =C:\Users\Yajana\PycharmProjects\Distributed-setup-4\Distributed-Setup\Client
+2018-03-28 18:21:42,578 INFO o.a.j.JMeter: IP: 192.168.216.2 Name: DESKTOP-4HBDBJJ FullName: DESKTOP-4HBDBJJ
+2018-03-28 18:21:42,578 INFO o.a.j.s.FileServer: Default base='C:\Users\Yajana\PycharmProjects\Distributed-setup-4\Distributed-Setup\Client'
+2018-03-28 18:21:42,578 INFO o.a.j.s.FileServer: Set new base='C:\Distributed-Master-Setup\scale_up_infra\scripts\chrome'
+2018-03-28 18:21:42,890 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2018-03-28 18:21:42,996 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2018-03-28 18:21:43,043 INFO o.a.j.s.SaveService: Using SaveService properties version 3.2
+2018-03-28 18:21:43,059 INFO o.a.j.s.SaveService: Loading file: C:\Distributed-Master-Setup\scale_up_infra\scripts\chrome\SanityFileupload.jmx
+2018-03-28 18:21:43,184 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2018-03-28 18:21:43,184 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
+2018-03-28 18:21:43,184 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2018-03-28 18:21:43,184 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2018-03-28 18:21:43,231 INFO o.a.j.JMeter: Creating summariser <summary>
+2018-03-28 18:21:43,231 INFO o.a.j.e.DistributedRunner: Configuring remote engine: 18.219.199.57
+2018-03-28 18:22:04,496 ERROR o.a.j.e.DistributedRunner: Failed to create engine at 18.219.199.57
+java.rmi.ConnectException: Connection refused to host: 18.219.199.57; nested exception is: 
+	java.net.ConnectException: Connection timed out: connect
+	at sun.rmi.transport.tcp.TCPEndpoint.newSocket(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.transport.tcp.TCPChannel.createConnection(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.transport.tcp.TCPChannel.newConnection(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.server.UnicastRef.newCall(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.registry.RegistryImpl_Stub.lookup(Unknown Source) ~[?:1.8.0_161]
+	at java.rmi.Naming.lookup(Unknown Source) ~[?:1.8.0_161]
+	at org.apache.jmeter.engine.ClientJMeterEngine.getEngine(ClientJMeterEngine.java:54) ~[ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.engine.ClientJMeterEngine.<init>(ClientJMeterEngine.java:67) ~[ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.engine.DistributedRunner.createEngine(DistributedRunner.java:237) ~[ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.engine.DistributedRunner.getClientEngine(DistributedRunner.java:213) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.engine.DistributedRunner.init(DistributedRunner.java:93) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.JMeter.runNonGui(JMeter.java:1003) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.JMeter.startNonGui(JMeter.java:910) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.JMeter.start(JMeter.java:538) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_161]
+	at org.apache.jmeter.NewDriver.main(NewDriver.java:248) [ApacheJMeter.jar:3.3 r1808647]
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.net.TwoStacksPlainSocketImpl.socketConnect(Native Method) ~[?:1.8.0_161]
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source) ~[?:1.8.0_161]
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.PlainSocketImpl.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.SocksSocketImpl.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.Socket.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.Socket.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.Socket.<init>(Unknown Source) ~[?:1.8.0_161]
+	at java.net.Socket.<init>(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.transport.proxy.RMIDirectSocketFactory.createSocket(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.transport.proxy.RMIMasterSocketFactory.createSocket(Unknown Source) ~[?:1.8.0_161]
+	... 19 more
+2018-03-28 18:22:04,512 ERROR o.a.j.u.JMeterUtils: Connection refused to host: 18.219.199.57; nested exception is: 
+	java.net.ConnectException: Connection timed out: connect
+2018-03-28 18:22:04,512 INFO o.a.j.e.DistributedRunner: Failed to configure 18.219.199.57
+2018-03-28 18:22:04,512 INFO o.a.j.e.DistributedRunner: Configuring remote engine:  18.217.228.121
+2018-03-28 18:22:25,544 ERROR o.a.j.e.DistributedRunner: Failed to create engine at 18.217.228.121
+java.rmi.ConnectException: Connection refused to host: 18.217.228.121; nested exception is: 
+	java.net.ConnectException: Connection timed out: connect
+	at sun.rmi.transport.tcp.TCPEndpoint.newSocket(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.transport.tcp.TCPChannel.createConnection(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.transport.tcp.TCPChannel.newConnection(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.server.UnicastRef.newCall(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.registry.RegistryImpl_Stub.lookup(Unknown Source) ~[?:1.8.0_161]
+	at java.rmi.Naming.lookup(Unknown Source) ~[?:1.8.0_161]
+	at org.apache.jmeter.engine.ClientJMeterEngine.getEngine(ClientJMeterEngine.java:54) ~[ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.engine.ClientJMeterEngine.<init>(ClientJMeterEngine.java:67) ~[ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.engine.DistributedRunner.createEngine(DistributedRunner.java:237) ~[ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.engine.DistributedRunner.getClientEngine(DistributedRunner.java:213) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.engine.DistributedRunner.init(DistributedRunner.java:93) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.JMeter.runNonGui(JMeter.java:1003) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.JMeter.startNonGui(JMeter.java:910) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.JMeter.start(JMeter.java:538) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_161]
+	at org.apache.jmeter.NewDriver.main(NewDriver.java:248) [ApacheJMeter.jar:3.3 r1808647]
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.net.TwoStacksPlainSocketImpl.socketConnect(Native Method) ~[?:1.8.0_161]
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source) ~[?:1.8.0_161]
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.PlainSocketImpl.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.SocksSocketImpl.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.Socket.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.Socket.connect(Unknown Source) ~[?:1.8.0_161]
+	at java.net.Socket.<init>(Unknown Source) ~[?:1.8.0_161]
+	at java.net.Socket.<init>(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.transport.proxy.RMIDirectSocketFactory.createSocket(Unknown Source) ~[?:1.8.0_161]
+	at sun.rmi.transport.proxy.RMIMasterSocketFactory.createSocket(Unknown Source) ~[?:1.8.0_161]
+	... 19 more
+2018-03-28 18:22:25,546 ERROR o.a.j.u.JMeterUtils: Connection refused to host: 18.217.228.121; nested exception is: 
+	java.net.ConnectException: Connection timed out: connect
+2018-03-28 18:22:25,546 INFO o.a.j.e.DistributedRunner: Failed to configure  18.217.228.121
+2018-03-28 18:22:25,547 INFO o.a.j.e.DistributedRunner: Stopping remote engines
+2018-03-28 18:22:25,547 INFO o.a.j.e.DistributedRunner: Remote engines have been stopped
+2018-03-28 18:22:25,548 ERROR o.a.j.JMeter: Error in NonGUIDriver
+java.lang.RuntimeException: Following remote engines could not be configured:[18.219.199.57,  18.217.228.121]
+	at org.apache.jmeter.engine.DistributedRunner.init(DistributedRunner.java:112) ~[ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.JMeter.runNonGui(JMeter.java:1003) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.JMeter.startNonGui(JMeter.java:910) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at org.apache.jmeter.JMeter.start(JMeter.java:538) [ApacheJMeter_core%20-%20Copy.jar:3.3 r1808647]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_161]
+	at org.apache.jmeter.NewDriver.main(NewDriver.java:248) [ApacheJMeter.jar:3.3 r1808647]
