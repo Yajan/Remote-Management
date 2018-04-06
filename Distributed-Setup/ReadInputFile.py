@@ -1,16 +1,10 @@
 import random
 import os
 import yaml
-from colorama import Fore, Back, Style
+from DisplayManager import fatalError,printError
+from pathlib import Path
+
 global content
-import sys
-
-sys.dont_write_bytecode = True
-
-def PrintError(exe):
-    print(Fore.RED + "************** FAILED **************")
-    print(Fore.RED+ exe)
-    print(Style.RESET_ALL)
 
 
 def GetConfigaration():
@@ -28,13 +22,12 @@ def GetConfigaration():
 
             gitVar = content['gitPath']
             Config['gitPath'] = gitVar[0]
-            #print(gitPath)
 
             return Config
 
 
         except yaml.YAMLError as exc:
-            PrintError(exc)
+            printError(exc)
 
 def GetTimeout():
     if "time-out" in content:
@@ -55,17 +48,14 @@ def GetTimeout():
             return timeout
 
 
-def GetRemoteSystems():
+def getExecutionType():
     if "executionType" in content:
-        executionContent = content['executionType']
+        executionType = content['executionType']
+        #print(executionType)
         # print(executionContent)
-
-        if 'distributed' in executionContent:
-            executionVar = executionContent['distributed']
-            # print(executionType)
-            remoteSystemVar = executionVar['remote-systems']
-            # print(remoteSystemVar)
-            return remoteSystemVar
+        return executionType
+    else:
+        return "single"
 
 
 def GetExecutionParameters():
@@ -159,7 +149,6 @@ def GetSystemConfig(groups):
             print(exc)
 
 def GetMasterHubInfo():
-    SystemInfo = {}
     with open('config/system.yaml', 'r') as stream:
         try:
             content = yaml.load(stream)
@@ -172,11 +161,16 @@ def GetMasterHubInfo():
 
 class ReadUserInputFile():
     def __init__(self, input_file):
-        global content
-        with open(input_file, 'r') as stream:
+        script_file = Path(input_file)
+        if script_file.is_file():
+            global content
+            with open(input_file, 'r') as stream:
 
-            try:
-                content = yaml.load(stream)
+                try:
+                    content = yaml.load(stream)
 
-            except yaml.YAMLError as exc:
-                print(exc)
+                except yaml.YAMLError as exc:
+                    print(exc)
+
+        else:
+            fatalError("Input file Not Present in "+input_file)

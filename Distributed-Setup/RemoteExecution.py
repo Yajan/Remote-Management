@@ -1,7 +1,6 @@
 import subprocess
 from colorama import Fore, Back, Style
 import threading
-import time
 import sys
 Invoke_Command_Script = "PowershellScripts/InvokeCommand1.ps1"
 Copy_File_Script = "PowershellScripts/CopyFile1.ps1"

@@ -1,38 +1,33 @@
+from __future__ import print_function
+from colorama import Fore, Back, Style,init
+import sys
 from wcwidth import wcswidth
-import curses
-# !/usr/bin/env python
-import os
 import shlex
 import struct
 import platform
 import subprocess
-import time
-def printContent(sizex,text,text1):
-    text.encode("utf-8")
-    text1.encode("utf-8")
-    text_len = wcswidth(text)
-    print(u' ' + text, u' ' * (sizex - text_len) + text1)
-    #print(u' ' * (40 - text_len) + text)
+import os
+from Logger import logger
 
+
+
+global sizex,sizey
+
+""" getTerminalSize()
+ - get width and height of console
+ - works on linux,os x,windows,cygwin(windows)
+"""
 def get_terminal_size():
-    """ getTerminalSize()
-     - get width and height of console
-     - works on linux,os x,windows,cygwin(windows)
-     originally retrieved from:
-     http://stackoverflow.com/questions/566746/how-to-get-console-window-width-in-python
-    """
     current_os = platform.system()
     tuple_xy = None
     if current_os == 'Windows':
         tuple_xy = _get_terminal_size_windows()
         if tuple_xy is None:
             tuple_xy = _get_terminal_size_tput()
-            # needed for window's python in cygwin's xterm!
     if current_os in ['Linux', 'Darwin'] or current_os.startswith('CYGWIN'):
         tuple_xy = _get_terminal_size_linux()
     if tuple_xy is None:
-        print
-        "default"
+        #print("default")
         tuple_xy = (80, 25)  # default value
     return tuple_xy
 
@@ -40,9 +35,6 @@ def get_terminal_size():
 def _get_terminal_size_windows():
     try:
         from ctypes import windll, create_string_buffer
-        # stdin handle is -10
-        # stdout handle is -11
-        # stderr handle is -12
         h = windll.kernel32.GetStdHandle(-12)
         csbi = create_string_buffer(22)
         res = windll.kernel32.GetConsoleScreenBufferInfo(h, csbi)
@@ -58,8 +50,6 @@ def _get_terminal_size_windows():
 
 
 def _get_terminal_size_tput():
-    # get terminal width
-    # src: http://stackoverflow.com/questions/263890/how-do-i-find-the-width-height-of-a-terminal-window
     try:
         cols = int(subprocess.check_call(shlex.split('tput cols')))
         rows = int(subprocess.check_call(shlex.split('tput lines')))
@@ -95,41 +85,99 @@ def _get_terminal_size_linux():
     return int(cr[1]), int(cr[0])
 
 
-if __name__ == "__main__":
-    sizex, sizey = get_terminal_size()
-    #print('width =', sizex, 'height =', sizey)
-    printContent(sizex,"Fist","Last")
+def printSuccess(text):
+    logger.info(text)
+    global sizex
+    text_len = wcswidth(text)
+    side = int((sizex/2)-(text_len/2)-2)
+    print(Fore.GREEN + u'*' * side, text, u'*' * side)
+    print(Style.RESET_ALL)
+
+def printFailure(text):
+    #logger.warn(text)
+    global sizex
+    text_len = wcswidth(text)
+    side = int((sizex/2)-(text_len/2)-2)
+    print(Fore.RED + u'*' * side, text, u'*' * side)
+    print(Style.RESET_ALL)
+
+def onStart():
+    logger.info("Display Setup Running")
+    global sizex, sizey
+    init(convert=True)
+    #os.system('cls')
+    sizex,sizey = get_terminal_size()
+
+def printConfig(type,jmeterPath,ExecutionPara,filepath,ips=[]):
+    printSuccess(type)
+    logger.info("Execution Type : "+type)
+    logger.info("Execution Parameters : "+str(ExecutionPara))
+    print("jmeter-path              :"+jmeterPath)
+    print("script                   :"+filepath)
+    print("iteration-in-seconds     :"+str(ExecutionPara['iteration']))
+    print("ramp-up-in-seconds:      :"+str(ExecutionPara['rampup']))
+    print("concurrency              :"+str(ExecutionPara['concurrency']))
+    print("time-out-in-seconds      :"+str(ExecutionPara['timeout']))
+    print("browser                  :"+ExecutionPara['browser'])
+    print("url                      :"+ExecutionPara['url'])
+    print("systems-info             :"+str(ips))
+    printSuccess("Starting Execution")
+    print(Style.RESET_ALL)
+
+def fatalError(error):
+    error = str(error)
+    printFailure("FAILED")
+    print(Fore.RED+ error )
+    logger.error(error)
+    print(Style.RESET_ALL)
+    sys.exit()
+
+def printWarning(content):
+    logger.warn(content)
+    #print(Fore.YELLOW+ content)
+    #print(Style.RESET_ALL)
+
+def printInfo(content):
+    logger.info(content)
+    print(Fore.BLUE+content)
+    print(Style.RESET_ALL)
+
+def printError(exe):
+    error = str(exe)
+    #printFailure("FAILED")
+    print(Fore.RED+ error)
+    logger.error(error)
+    print(Style.RESET_ALL)
 
 
-class displayContent():
-    def __init__(self):
 
-        self.myscreen = curses.initscr()
-        curses.start_color()
-        curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
-        y, x = self.myscreen.getmaxyx()
-        self.z = x / 2
+def printSysInfo(dict):
+    logger.info(dict)
+    for var in dict:
+        content = dict[var]
+        print(Fore.BLUE+var,'=',content)
+    print(Style.RESET_ALL)
+
+# def printPerfData(dict):
+#     #for var in dict:
+#         #content = dict[var]
+#     #sys.stdout.write("\r"  + "Time"+' = '+dict['time'] +" Disk" + ' = ' + str(dict['disk']) + " Memory"+ ' = '+str(dict['memory']))
+#     #print("Time"+' = '+dict['time'] +" Disk" + ' = ' + str(dict['disk']) + " Memory"+ ' = '+str(dict['memory']))
+#     logger.info("Time"+' = '+dict['time'] +" Disk" + ' = ' + str(dict['disk']) + " Memory"+ ' = '+str(dict['memory']))
+#     #print("Hello world")
+#     #sys.stdout.flush()
+
+    #print(, end='\r')
+
+class DisplayManager():
+    onStart()
 
 
-    def displayRight(self,content):
-        myscreen = self.myscreen
-        myscreen.move(0, self.z)
-        myscreen.addstr(content, curses.color_pair(1))
-        self.myscreen.refresh()
-        #self.myscreen.getch()
-        #curses.endwin()
 
 
-    def displayLeft(self,content):
-        myscreen = self.myscreen
-        myscreen.move(0,0)
-        myscreen.addstr(content, curses.color_pair(1))
-        self.myscreen.refresh()
-        #self.myscreen.getch()
-        #curses.endwin()
 
-    def endSession(self):
-        curses.endwin()
+
+
 
 
 
