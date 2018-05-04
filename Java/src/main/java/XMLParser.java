@@ -25,12 +25,26 @@ public class XMLParser {
 
         Options options = new Options();
 
+        Option action = new Option("action",true,"Action");
+        options.addOption(action);
+
         Option script = new Option("script",true,"JMX Script");
-        script.setRequired(true);
         options.addOption(script);
 
+        Option url = new Option("url",true,"HTTP request");
+        options.addOption(url);
+
+        Option count = new Option("count",true,"Iteration");
+        options.addOption(count);
+
+        Option thread = new Option("thread",true,"Number of Users");
+        options.addOption(thread);
+
+        Option rampup = new Option("rampup",true,"Rampup In Seconds");
+        options.addOption(rampup);
+
+
         Option timer = new Option("t","timer",true,"Start Time in yyyy:MM:dd:hh:mm:ss");
-        timer.setRequired(false);
         options.addOption(timer);
 
         CommandLineParser parser = new DefaultParser();
@@ -41,100 +55,78 @@ public class XMLParser {
             cmd = parser.parse(options,args);
         }catch (ParseException e){
             System.out.println(e.getMessage());
-            formatter.printHelp("utility-name",options);
+            formatter.printHelp("jmeter_editor",options);
 
             System.exit(1);
             return;
         }
+        String act = cmd.getOptionValue("action");
+        if (act == null){
+            formatter.printHelp("jmeter_editor",options);
+            System.out.println("No action is given perfrom");
+            System.out.println("Existing the program");
+            System.exit(1);
+            return;
+
+        }
+        if(act.equalsIgnoreCase("create")){
+            if( cmd.getOptionValue("thread") != null && cmd.getOptionValue("count") != null || cmd.getOptionValue("rampup") != null) {
+                System.out.println("Execution started @ "+logTime());
+                Create.createJMX(cmd.getOptionValue("url"), cmd.getOptionValue("thread"), cmd.getOptionValue("count"), cmd.getOptionValue("rampup"));
+                System.out.println("Executoin completed @"+logTime());
+            }
+            else {
+                System.out.println("Execution started @ "+logTime());
+                Create.createJMX(cmd.getOptionValue("url"));
+                System.out.println("Completed @ "+logTime());
+            }
+        }
+        else if (act.equalsIgnoreCase("edit")){
+            String filename = cmd.getOptionValue("script");
+            String stime = cmd.getOptionValue("timer");
+            System.out.println("JMX Editing started @ "+logTime());
+
+            System.out.println("JMX script to edit : "+filename);
+            System.out.println("Time to start the test : "+stime);
+            String time = militime(stime);
+            System.out.println("Time in mili seconds : "+time);
+            Edit.editJMX(filename,time);
+            System.out.println("JMX Editing completed @ :"+logTime());
+        }
 
 
-        String filename = cmd.getOptionValue("script");
-        String stime = cmd.getOptionValue("timer");
-        System.out.println("Execution started");
-
-        System.out.println(filename);
-        System.out.println(stime);
-        String time = militime(stime);
-        System.out.println(time);
-        editJMX(filename,time);
 
     }
 
     public static String militime(String time) {
         try {
             DateFormat sdf = new SimpleDateFormat("yyyy:MM:dd:hh:mm:ss");
+
             Date date = sdf.parse(time);
 
             Calendar now = Calendar.getInstance();
             TimeZone timeZone = now.getTimeZone();
-            System.out.println(timeZone.getDisplayName());
+            System.out.println("Current Timezone is : "+timeZone.getDisplayName());
 
             sdf.setTimeZone(timeZone);
 
             String militime = String.valueOf(date.getTime());
-            System.out.println(militime);
+//            System.out.println(militime);
             return militime;
         }catch (Exception  exec){
             return String.valueOf(exec);
         }
     }
 
-
-
-    public static void editJMX(String xmlfile,String time){
-        try {
-            File fXmlFile = new File(xmlfile);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
-
-            //optional, but recommended
-            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-            doc.getDocumentElement().normalize();
-
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
-            NodeList nList = doc.getElementsByTagName("hashTree");
-
-            Node nNode = null;
-            NodeList sList = null;
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                nNode = nList.item(temp);
-                System.out.println("Sub root Element :" + nNode.getNodeName());
-                sList = doc.getElementsByTagName("ThreadGroup");
-                break;
-            }
-
-            for (int tem = 0; tem < sList.getLength(); tem++) {
-
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Node sNode = sList.item(tem);
-
-                    Element eElement = (Element) sNode;
-                    System.out.println("Node Element :" + nNode.getNodeName());
-                    //System.out.println(eElement.getTagName());
-
-                    // System.out.println("Value : " + eElement.getChildNodes());
-
-                    System.out.println("Bool Value : " + eElement.getElementsByTagName("longProp").item(0).getTextContent());
-                    Node timer = eElement.getElementsByTagName("longProp").item(0);
-                    timer.setTextContent(time);
-                    System.out.println("Bool Value : " + eElement.getElementsByTagName("longProp").item(0).getTextContent());
-                    // write the content into xml file
-                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                    Transformer transformer = transformerFactory.newTransformer();
-                    DOMSource source = new DOMSource(doc);
-                    StreamResult result = new StreamResult(new File(xmlfile));
-                    transformer.transform(source, result);
-
-                    System.out.println("Done");
-                    break;
-                }
-            }
-        } catch (Exception exec) {
-            System.out.println(exec);
-        }
+    public static String logTime(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        //System.out.println(dateFormat.format(date));
+        return dateFormat.format(date);
     }
+
+
+
 
 
 
